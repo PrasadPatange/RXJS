@@ -1,0 +1,148 @@
+<div class="container mt-5">
+   <!-- Search -->
+   <div class="text-center offset-1">
+    <form #searchForm="ngForm">
+      <div class="form-group row mt-3 mb-5">
+        <div class="form-group row">
+          <label
+            for="search"
+            class="col-sm-2 col-form-label"
+            style="text-align: right"
+            ><b>Serach &nbsp;<i class="bi bi-search"></i></b
+          ></label>
+          <div class="col-sm-6">
+            <input
+              type="text"
+              class="form-control"
+              style="border-color: black"
+              id="search"
+              required
+              name="searchTerm"
+              autocomplete="off"
+              ngModel
+              placeholder="Start Searching to Filter..."
+            />
+          </div>
+        </div>
+      </div>
+    </form>
+    <div class="results" *ngIf="userList?.length">
+      <div class="d-flex">
+        <h3>Search Results</h3>
+        <span class="ms-auto text-muted"
+          ><b>{{ searchCount }}</b> Result Found...</span
+        >
+      </div>
+    </div>
+
+    <div *ngIf="!userList?.length">
+      <h1 class="text-center">No Data Found...</h1>
+    </div>
+  </div>
+<!-- </div> -->
+<!-- </div> -->
+      <!-- User Table  -->
+      <div class="row">
+        <div class="col-md-12">
+          <table class="table"  *ngIf="userList?.length">
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let data of userList; let i = index">
+                <th scope="row">{{ i + 1 }}</th>
+                <td>{{ data.name }}</td>
+                <td>{{ data.email }}</td>
+                <td>
+                  <button
+                    class="btn btn-primary"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModal"
+                    (click)="viewUser(data.id)"
+                  >
+                    View
+                  </button>
+                  &nbsp;
+                  <button
+                    class="btn btn-secondary"
+                    [routerLink]="['/edit', data.id]"
+                  >
+                    Edit
+                  </button>
+                  &nbsp;
+                  <button class="btn btn-danger" (click)="deleteUser(data)">
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <br />
+          <br />
+          <div class="text-center" *ngIf="deleteErr">
+            <div class="alert alert-danger" role="alert">
+              {{ deleteErr }}
+            </div>
+          </div>
+          <div class="text-center" *ngIf="userName">
+            <div class="alert alert-primary" role="alert">
+              {{ userName }}
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal -->
+        <div
+          class="modal fade"
+          id="exampleModal"
+          tabindex="-1"
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">
+                  Modal title
+                </h1>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <div class="text-center mt-5 mb-5" *ngIf="singleUser">
+                  <div class="text-center" *ngIf="errorMsg">
+                    <div class="alert alert-danger" role="alert">
+                      {{ errorMsg }}
+                    </div>
+                  </div>
+
+                  <h3>ID : {{ singleUser?.id }}</h3>
+                  <h3>Name : {{ singleUser?.name }}</h3>
+                  <h3>Email : {{ singleUser?.email }}</h3>
+                </div>
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-bs-dismiss="modal"
+                  >
+                    Close
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <!-- </div> -->
+  <!-- </form> -->
+</div>

@@ -1,0 +1,52 @@
+<div class="container mt-5">
+    
+    <div class="text-center">
+        <h1>Edit User</h1>
+    </div>
+    <form [formGroup]="userForm" (submit)="updateUser()">
+        
+        <input type="text" hidden class="form-control" id="exampleInputEmail1"  formControlName="id" >
+
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label" >Name</label>
+          <input type="text" class="form-control" id="exampleInputEmail1"  formControlName="name" placeholder="Enter Name">
+          <div *ngIf="formControl['name'].touched && formControl['name'].invalid">
+                <span class="text-danger"
+                *ngIf="formControl['name'].hasError('required')"
+                >
+                Name is Required*
+            </span>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Email</label>
+          <input type="email" class="form-control" id="exampleInputEmail1" formControlName="email" placeholder="Enter Email">
+          <div *ngIf="formControl['email'].touched && formControl['email'].invalid">
+            <span class="text-danger"
+            *ngIf="formControl['email'].hasError('required')"
+            >
+            Email is Required*
+        </span>
+            <span class="text-danger"
+            *ngIf="formControl['email'].hasError('email')"
+            >
+            Please Enter Valid Email ID*
+        </span>
+      </div>
+        </div>
+       
+        <button type="submit" [disabled]="!userForm.valid" class="btn btn-primary">Update User</button>
+        <br>
+      </form>
+      <br>
+      <div class="text-center" *ngIf="errorMessage">
+          <div class="alert alert-danger" role="alert">
+              {{errorMessage}}
+          </div>
+      </div>
+      <div class="text-center" *ngIf="success">
+          <div class="alert alert-primary" role="alert">
+             {{success}}
+            </div>
+      </div>
+</div>

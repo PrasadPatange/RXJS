@@ -1,0 +1,24 @@
+{
+  "users": [
+    {
+      "id": 6,
+      "name": "prasad",
+      "email": "prasadpatange@gmail.com"
+    },
+    {
+      "id": 12,
+      "name": "gajanan",
+      "email": "gajanan@gmail.com"
+    },
+    {
+      "id": 14,
+      "name": "sayali patange",
+      "email": "sayali@gmail.com"
+    },
+    {
+      "name": "abcd",
+      "email": "abcd@gmail.com",
+      "id": 15
+    }
+  ]
+}
